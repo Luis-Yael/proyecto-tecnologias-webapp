@@ -60,7 +60,7 @@
 
       <mat-form-field class="mat-input" appearance="outline">
         <mat-label>Edad</mat-label>
-        <input matInput [(ngModel)]="admin.edad" placeholder="Escribe la edad">
+        <input matInput [(ngModel)]="admin.edad" mask="00" placeholder="Escribe la edad">
       </mat-form-field>
       <div *ngIf="errors.edad" class="invalid-feedback">{{ errors.edad }}</div>
 

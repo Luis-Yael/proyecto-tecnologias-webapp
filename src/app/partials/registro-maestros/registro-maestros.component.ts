@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MaestrosService } from 'src/app/services/maestros.service';
+declare var $:any;
 
 @Component({
   selector: 'app-registro-maestros',
@@ -9,8 +12,15 @@ export class RegistroMaestrosComponent implements OnInit{
   @Input() rol: string = "";
   @Input() datos_user: any = {};
 
+  //Para contraseñas
+  public hide_1: boolean = false;
+  public hide_2: boolean = false;
+  public inputType_1: string = 'password';
+  public inputType_2: string = 'password';
+
   public maestro:any = {};
   public errors:any = {};
+  public editar:boolean = false;
 
   //Para el select
   public areas: any[] = [
@@ -21,7 +31,7 @@ export class RegistroMaestrosComponent implements OnInit{
     {value: '5', viewValue: 'Matemáticas'},
   ];
 
-  public materias:any[]= [
+  public materias:any[] = [
     {value: '1', nombre: 'Aplicaciones Web'},
     {value: '2', nombre: 'Programación 1'},
     {value: '3', nombre: 'Bases de datos'},
@@ -34,9 +44,39 @@ export class RegistroMaestrosComponent implements OnInit{
     {value: '10', nombre: 'Administración de S.O.'},
   ];
 
-  constructor(){}
+  constructor(
+    private maestrosService: MaestrosService,
+    private router: Router,
+    public activatedRoute: ActivatedRoute,
+  ){}
 
   ngOnInit(): void {
+    this.maestro = this.maestrosService.esquemaMaestro();
+  }
+
+  public regresar(){
+
+  }
+
+  public registrar(){
+    //Validar
+    this.errors = [];
+
+    this.errors = this.maestrosService.validarMaestro(this.maestro, this.editar);
+    if(!$.isEmptyObject(this.errors)){
+      return false;
+    }
+    //Validar la contraseña
+    if(this.maestro.password == this.maestro.confirmar_password){
+
+    }else{
+      alert("Las contraseñas no coinciden");
+      this.maestro.password="";
+      this.maestro.confirmar_password="";
+    }
+  }
+
+  public actualizar(){
 
   }
 
@@ -57,5 +97,39 @@ export class RegistroMaestrosComponent implements OnInit{
 
   public revisarSeleccion(nombre: string){
     return false;
+  }
+
+  //Funciones para password
+  showPassword()
+  {
+    if(this.inputType_1 == 'password'){
+      this.inputType_1 = 'text';
+      this.hide_1 = true;
+    }
+    else{
+      this.inputType_1 = 'password';
+      this.hide_1 = false;
+    }
+  }
+
+  showPwdConfirmar()
+  {
+    if(this.inputType_2 == 'password'){
+      this.inputType_2 = 'text';
+      this.hide_2 = true;
+    }
+    else{
+      this.inputType_2 = 'password';
+      this.hide_2 = false;
+    }
+  }
+
+  //Función para detectar el cambio de fecha
+  public changeFecha(event :any){
+    console.log(event);
+    console.log(event.value.toISOString());
+
+    this.maestro.fecha_nacimiento = event.value.toISOString().split("T")[0];
+    console.log("Fecha: ", this.maestro.fecha_nacimiento);
   }
 }
