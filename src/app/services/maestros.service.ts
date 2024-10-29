@@ -99,8 +99,8 @@ export class MaestrosService {
       error["area_investigacion"] = this.errorService.required;
     }
 
-    if(data["materias_json"].length == 0){
-      alert("Debes seleccionar materias para poder registrarte.");
+    if(!this.validatorService.required(data["materias_json"])){
+      error["materias_json"] = "Debes seleccionar materias para poder registrarte";
     }
     //Return arreglo
     return error;
