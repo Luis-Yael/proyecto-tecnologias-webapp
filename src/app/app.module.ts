@@ -21,6 +21,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 //Para usar el mask
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 //Cambia el idioma a español
@@ -30,6 +32,9 @@ import { RegistroAdminComponent } from './partials/registro-admin/registro-admin
 import { RegistroAlumnosComponent } from './partials/registro-alumnos/registro-alumnos.component';
 import { RegistroMaestrosComponent } from './partials/registro-maestros/registro-maestros.component';
 import { HomeScreenComponent } from './screens/home-screen/home-screen.component';
+import { AdminScreenComponent } from './services/admin-screen/admin-screen.component';
+import { AlumnosScreenComponent } from './services/alumnos-screen/alumnos-screen.component';
+import { MaestrosScreenComponent } from './services/maestros-screen/maestros-screen.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,10 @@ import { HomeScreenComponent } from './screens/home-screen/home-screen.component
     RegistroAdminComponent,
     RegistroAlumnosComponent,
     RegistroMaestrosComponent,
-    HomeScreenComponent
+    HomeScreenComponent,
+    AdminScreenComponent,
+    AlumnosScreenComponent,
+    MaestrosScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +65,9 @@ import { HomeScreenComponent } from './screens/home-screen/home-screen.component
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
