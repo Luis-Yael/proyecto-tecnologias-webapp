@@ -36,7 +36,13 @@ export class MaestrosScreenComponent implements OnInit{
   ngOnInit(): void {
     this.name_user = this.facadeService.getUserCompleteName();
     this.rol = this.facadeService.getUserGroup();
-
+    //Validar que haya inicio de sesión
+    //Obtengo el token del login
+    this.token = this.facadeService.getSessionToken();
+    console.log("Token: ", this.token);
+    if(this.token == ""){
+      this.router.navigate([""]);
+    }
     //Obtener maestros
     this.obtenerMaestros();
     //Para paginador
@@ -90,8 +96,8 @@ export class MaestrosScreenComponent implements OnInit{
     );
   }
 
-  public goEditar(userId: number){
-
+  public goEditar(idUser: number){
+    this.router.navigate(["registro-usuarios/maestro/"+idUser]);
   }
 
   public delete(userId: number){

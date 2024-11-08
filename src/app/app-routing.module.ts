@@ -11,6 +11,7 @@ const routes: Routes = [
   //Pantalla principal del login
   { path: '', component: LoginScreenComponent, pathMatch: 'full' },
   { path: 'registro-usuarios', component: RegistroUsuariosScreenComponent, pathMatch: 'full' },
+  { path: 'registro-usuarios/:rol/:id', component: RegistroUsuariosScreenComponent, pathMatch: 'full' },
   { path: 'home', component: HomeScreenComponent, pathMatch: 'full' },
   { path: 'alumnos', component: AlumnosScreenComponent, pathMatch: 'full' },
   { path: 'maestros', component: MaestrosScreenComponent, pathMatch: 'full' },

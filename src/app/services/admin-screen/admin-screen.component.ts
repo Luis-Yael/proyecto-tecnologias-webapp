@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FacadeService } from '../facade.service';
 import { AdministradoresService } from '../administradores.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-screen',
@@ -15,6 +16,7 @@ export class AdminScreenComponent implements OnInit{
   constructor(
     private facadeService: FacadeService,
     private administradoresService: AdministradoresService,
+    private router: Router
   ){}
 
   ngOnInit(): void {
@@ -35,8 +37,8 @@ export class AdminScreenComponent implements OnInit{
     );
   }
 
-  public goEditar(userId: number){
-
+  public goEditar(idUser: number){
+    this.router.navigate(["registro-usuarios/administrador/"+idUser]);
   }
 
   public delete(userId: number){
