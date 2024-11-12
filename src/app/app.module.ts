@@ -23,6 +23,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
 //Para usar el mask
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 //Cambia el idioma a español
@@ -35,6 +36,9 @@ import { HomeScreenComponent } from './screens/home-screen/home-screen.component
 import { AdminScreenComponent } from './services/admin-screen/admin-screen.component';
 import { AlumnosScreenComponent } from './services/alumnos-screen/alumnos-screen.component';
 import { MaestrosScreenComponent } from './services/maestros-screen/maestros-screen.component';
+import { EliminarUserModalComponent } from './modals/eliminar-user-modal/eliminar-user-modal.component';
+import { GraficasScreenComponent } from './screens/graficas-screen/graficas-screen.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,9 @@ import { MaestrosScreenComponent } from './services/maestros-screen/maestros-scr
     HomeScreenComponent,
     AdminScreenComponent,
     AlumnosScreenComponent,
-    MaestrosScreenComponent
+    MaestrosScreenComponent,
+    EliminarUserModalComponent,
+    GraficasScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +73,9 @@ import { MaestrosScreenComponent } from './services/maestros-screen/maestros-scr
     MatNativeDateModule,
     NgxMaskDirective,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    NgChartsModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},

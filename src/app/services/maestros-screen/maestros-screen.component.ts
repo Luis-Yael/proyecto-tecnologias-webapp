@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/eliminar-user-modal.component';
 import { FacadeService } from 'src/app/services/facade.service';
 import { MaestrosService } from 'src/app/services/maestros.service';
 
@@ -30,7 +32,8 @@ export class MaestrosScreenComponent implements OnInit{
   constructor(
     public facadeService: FacadeService,
     public maestrosService: MaestrosService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ){}
 
   ngOnInit(): void {
@@ -100,8 +103,25 @@ export class MaestrosScreenComponent implements OnInit{
     this.router.navigate(["registro-usuarios/maestro/"+idUser]);
   }
 
-  public delete(userId: number){
-
+  public delete(idUser: number){
+    //console.log("User:", idUser);
+    const dialogRef = this.dialog.open(EliminarUserModalComponent,{
+      data: {id: idUser, rol: 'maestro'}, //Se pasan valores a través del componente
+      height: '288px',
+      width: '328px',
+    });
+    //Esta se ejecuta después de un evento que cierra el modal
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.isDelete){
+        console.log("Admin eliminado");
+        //Recargar página
+        alert("Administrador eliminado correctamente");
+        window.location.reload();
+      }else{
+        alert("Administrador no eliminado ");
+        console.log("No se eliminó el admin");
+      }
+    });
   }
 }//Fin de la clase
 
